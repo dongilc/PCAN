@@ -9,8 +9,16 @@ import ctypes
 crc_vesc = ctypes.cdll.LoadLibrary('./crc_vesc.dll')
 
 can_packet_id = {
-'CAN_PACKET_FILL_RX_BUFFER':0x05,
-'CAN_PACKET_PROCESS_RX_BUFFER':0x07
+'CAN_PACKET_SET_DUTY':0,
+'CAN_PACKET_SET_CURRENT':1,
+'CAN_PACKET_SET_CURRENT_BRAKE':2,
+'CAN_PACKET_SET_RPM':3,
+'CAN_PACKET_SET_POS':4,
+'CAN_PACKET_FILL_RX_BUFFER':5,
+'CAN_PACKET_FILL_RX_BUFFER_LONG':6,
+'CAN_PACKET_PROCESS_RX_BUFFER':7,
+'CAN_PACKET_PROCESS_SHORT_BUFFER':8,
+'CAN_PACKET_STATUS':9
 }
 
 comm_set_custom = { 
@@ -101,7 +109,7 @@ def ProcessMessage(*args):
     newTimestamp = TPCANTimestampFD()
     newTimestamp.value = (itsTimeStamp.micros + 1000 * itsTimeStamp.millis + 0x100000000 * 1000 * itsTimeStamp.millis_overflow)
 
-    time = "Timestamp:{:0.3f}usec".format(newTimestamp.value/1000000)
+    time = "Timestamp:{:0.3f}sec".format(newTimestamp.value/1000000)
     period = newTimestamp.value - time_prev
     cycle_time = "Cycle Time:{:0.3f}msec".format(period/1000)
     TYPE = "TYPE:{}".format(msg_type[hex(newMsg.MSGTYPE)])
@@ -210,22 +218,22 @@ if __name__ == '__main__':
     try:
         # 무한 반복
         while True:
-            #ReadMessages()
+            ReadMessages()
             num += 1
     # Ctrl + C를 입력할 경우
     except KeyboardInterrupt:
         print('Total Rcv number is {}, Quit to receive'.format(num))
-    '''
+'''
 
     # CAN MSG Write Routine
     #VescCustumControl(83, 'COMM_SET_DUTY',0.1)
     #VescCustumControl(83, 'COMM_SET_CURRENT',0.5)
     #VescCustumControl(83, 'COMM_SET_CURRENT_BRAKE',5)
     #VescCustumControl(83, 'COMM_SET_DPS',0) # position lock on current position
-    VescCustumControl(83, 'COMM_SET_DPS',1000)
+    #VescCustumControl(83, 'COMM_SET_DPS',1000)
     #VescCustumControl(83, 'COMM_SET_DPS_VMAX',2000)
     #VescCustumControl(83, 'COMM_SET_SERVO',0)
-    #VescCustumControl(83, 'COMM_SET_RELEASE',0)
+    VescCustumControl(83, 'COMM_SET_RELEASE',0)
 
     # Close PCAN Device
     pcan_Close()
