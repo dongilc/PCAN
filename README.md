@@ -1,4 +1,4 @@
-# PCAN
+# PCAN CAN Analyer
 
 # 1. install peak-linux-driver-8.11.0
 cd peak-linux-driver-8.11.0
@@ -16,3 +16,9 @@ sudo apt-get install pcanview-ncurses
 
 # 4. Reboot once
 
+# using pcanview
+pcanview
+
+# using custom program
+cd PCAN-Basic\ API/Samples/Python/
+python3 PCAN_read_only.py 
