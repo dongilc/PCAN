@@ -3,9 +3,14 @@
 # 1. install peak-linux-driver-8.11.0
 cd peak-linux-driver-8.11.0
 sudo make install
+# in case of after kernel updated, it might require to run
+make clean
+sudo make
+sudo make install
+# and re-connect usb
 
 # 2. install PCAN-Basic_Linux-4.4.2
-cd PCAN-Basic_Linux-4.4.2
+cd PCAN-Basic_Linux-4.4.2/libpcanbasic/
 sudo make install
 
 # 3. install pcanview 

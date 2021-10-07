@@ -211,6 +211,16 @@ if __name__ == '__main__':
     # Open PCAN Device
     pcan_Open()
 
+    # CAN MSG Write Routine
+    VescCustumControl(76, 'COMM_SET_DUTY',0.1)
+    VescCustumControl(84, 'COMM_SET_CURRENT',0.5)
+    VescCustumControl(101, 'COMM_SET_CURRENT_BRAKE',5)
+    VescCustumControl(76, 'COMM_SET_DPS',0) # position lock on current position
+    VescCustumControl(84, 'COMM_SET_DPS',1000)
+    #VescCustumControl(83, 'COMM_SET_DPS_VMAX',2000)
+    VescCustumControl(101, 'COMM_SET_SERVO',0)
+    VescCustumControl(101, 'COMM_SET_RELEASE',0)
+
     '''
     # CAN MSG Read Routine
     num = 0
@@ -223,20 +233,7 @@ if __name__ == '__main__':
     # Ctrl + C를 입력할 경우
     except KeyboardInterrupt:
         print('Total Rcv number is {}, Quit to receive'.format(num))
-'''
-
-    # CAN MSG Write Routine
-    #VescCustumControl(83, 'COMM_SET_DUTY',0.1)
-    #VescCustumControl(83, 'COMM_SET_CURRENT',0.5)
-    #VescCustumControl(83, 'COMM_SET_CURRENT_BRAKE',5)
-    #VescCustumControl(83, 'COMM_SET_DPS',0) # position lock on current position
-    #VescCustumControl(83, 'COMM_SET_DPS',1000)
-    #VescCustumControl(83, 'COMM_SET_DPS_VMAX',2000)
-    #VescCustumControl(83, 'COMM_SET_SERVO',0)
-    VescCustumControl(83, 'COMM_SET_RELEASE',0)
+    '''
 
     # Close PCAN Device
     pcan_Close()
-
-
-
