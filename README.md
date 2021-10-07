@@ -5,13 +5,13 @@
 cd peak-linux-driver-8.11.0
 sudo make install
 ```
-# in case of after kernel updated, it might require to run
+## in case of after kernel updated, it might require to run
 ```
 make clean
 sudo make
 sudo make install
 ```
-# and re-connect usb
+## and re-connect usb
 
 # 2. install PCAN-Basic_Linux-4.4.2
 ```
@@ -29,7 +29,7 @@ sudo apt-get install pcanview-ncurses
 
 # 4. Reboot once
 
-# using pcanview
+## using pcanview
 ```
 pcanview
 ```
